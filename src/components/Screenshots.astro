@@ -1,0 +1,83 @@
+---
+const screenshots = [
+  { src: '/screenshots/home-screen.png', alt: 'Home screen with daily progress' },
+  { src: '/screenshots/dict-tab-definitions.png', alt: 'Dictionary definitions view' },
+  { src: '/screenshots/write-tab-animation.png', alt: 'Stroke order animation' },
+  { src: '/screenshots/dict-tab-tooltip.png', alt: 'Interactive word tooltips' },
+  { src: '/screenshots/practice-complete.png', alt: 'Practice results' },
+  { src: '/screenshots/dict-tab-examples.png', alt: 'Example sentences and words' },
+];
+---
+
+<section class="screenshots" id="screenshots">
+  <div class="screenshots-header reveal">
+    <div class="container">
+      <span class="section-label">Screenshots</span>
+      <h2>See Hanyu in action</h2>
+    </div>
+  </div>
+
+  <div class="scroll-track">
+    <div class="scroll-inner">
+      {screenshots.map((s) => (
+        <div class="phone-mockup scroll-phone">
+          <img src={s.src} alt={s.alt} width="280" height="606" loading="lazy" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .screenshots {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-color: var(--color-bg-alt);
+    overflow: hidden;
+  }
+
+  .screenshots-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .scroll-track {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+  }
+
+  .scroll-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-inner {
+    display: flex;
+    gap: 24px;
+    padding-inline: max(24px, calc((100vw - 1200px) / 2 + 24px));
+    width: max-content;
+  }
+
+  .scroll-phone {
+    width: 220px;
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-phone:hover {
+    transform: translateY(-8px);
+  }
+
+  @media (max-width: 768px) {
+    .scroll-phone {
+      width: 180px;
+    }
+
+    .scroll-inner {
+      gap: 16px;
+    }
+  }
+</style>

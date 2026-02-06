@@ -1,0 +1,167 @@
+---
+---
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <h1>Learn Chinese,<br/>naturally.</h1>
+      <p class="hero-sub">
+        Master characters, tones, and vocabulary with an app built for how your brain actually learns.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn btn-primary hero-cta">
+          Start Learning — It's Free
+        </a>
+        <a href="#features" class="hero-link">
+          See features
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-phones">
+      <div class="phone-mockup hero-phone-main">
+        <img src="/screenshots/home-screen.png" alt="Hanyu app home screen" width="280" height="606" loading="eager" />
+      </div>
+      <div class="phone-mockup hero-phone-side hero-phone-left">
+        <img src="/screenshots/write-tab-animation.png" alt="Character writing practice" width="280" height="606" loading="eager" />
+      </div>
+      <div class="phone-mockup hero-phone-side hero-phone-right">
+        <img src="/screenshots/dict-tab-definitions.png" alt="Dictionary definitions" width="280" height="606" loading="eager" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: clamp(48px, 6vw, 72px);
+    padding-bottom: clamp(80px, 12vw, 140px);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0, 97, 255, 0.06) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-text {
+    max-width: 640px;
+    margin-bottom: 64px;
+  }
+
+  .hero h1 {
+    margin-bottom: 20px;
+  }
+
+  .hero-sub {
+    font-size: var(--size-body-lg);
+    color: var(--color-text-secondary);
+    max-width: 460px;
+    margin-inline: auto;
+    margin-bottom: 36px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero-cta {
+    padding: 16px 36px;
+    font-size: 1.0625rem;
+  }
+
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    transition: gap 0.2s ease;
+  }
+
+  .hero-link:hover {
+    gap: 8px;
+  }
+
+  /* Phone cluster */
+  .hero-phones {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .hero-phone-main {
+    position: relative;
+    z-index: 2;
+    width: 240px;
+    flex-shrink: 0;
+  }
+
+  .hero-phone-side {
+    position: absolute;
+    width: 200px;
+    top: 40px;
+    opacity: 0.85;
+    z-index: 1;
+  }
+
+  .hero-phone-left {
+    right: calc(50% + 100px);
+    transform: rotate(-6deg);
+  }
+
+  .hero-phone-right {
+    left: calc(50% + 100px);
+    transform: rotate(6deg);
+  }
+
+  @media (max-width: 768px) {
+    .hero-text {
+      margin-bottom: 48px;
+    }
+
+    .hero-phone-main {
+      width: 200px;
+    }
+
+    .hero-phone-side {
+      width: 160px;
+      top: 32px;
+    }
+
+    .hero-phone-left {
+      right: calc(50% + 76px);
+    }
+
+    .hero-phone-right {
+      left: calc(50% + 76px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-phone-side {
+      display: none;
+    }
+  }
+</style>

@@ -46,6 +46,12 @@
       </button>
     </form>
 
+  </div>
+</section>
+
+<div id="wl-modal" class="wl-modal" hidden>
+  <div class="wl-modal-backdrop"></div>
+  <div class="wl-modal-content">
     <div id="wl-success" class="wl-message wl-success" hidden>
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <circle cx="24" cy="24" r="24" fill="rgba(52,199,89,0.15)"/>
@@ -61,15 +67,30 @@
       </p>
     </div>
   </div>
-</section>
+</div>
 
 <script>
   const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSewqSjO3dpsjJV6IYTuF7sM8g0NHpPu-SUkWzRa4TDCr63qyA/formResponse';
 
   const form = document.getElementById('waitlist-form') as HTMLFormElement;
   const submitBtn = document.getElementById('wl-submit') as HTMLButtonElement;
+  const modal = document.getElementById('wl-modal')!;
   const successEl = document.getElementById('wl-success')!;
   const errorEl = document.getElementById('wl-error')!;
+
+  function showModal(el: HTMLElement) {
+    el.hidden = false;
+    modal.hidden = false;
+    setTimeout(() => closeModal(), 5000);
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    successEl.hidden = true;
+    errorEl.hidden = true;
+  }
+
+  modal.querySelector('.wl-modal-backdrop')!.addEventListener('click', closeModal);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -77,9 +98,7 @@
     // Honeypot check
     const hp = (form.querySelector('[name="website"]') as HTMLInputElement).value;
     if (hp.trim() !== '') {
-      // Silently pretend success
-      successEl.hidden = false;
-      setTimeout(() => { successEl.hidden = true; }, 5000);
+      showModal(successEl);
       return;
     }
 
@@ -95,7 +114,6 @@
         fieldset.classList.add('field-error');
         fieldset.addEventListener('change', () => fieldset.classList.remove('field-error'), { once: true });
       }
-      // Trigger native validation for text inputs
       form.reportValidity();
       return;
     }
@@ -103,7 +121,6 @@
     // Loading state
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
-    errorEl.hidden = true;
 
     try {
       await fetch(FORM_URL, {
@@ -118,12 +135,10 @@
     } catch {
       // no-cors responses are opaque — errors are expected, ignore them
     } finally {
-      // Always show success since we can't read the response with no-cors
       form.reset();
       submitBtn.disabled = false;
       submitBtn.classList.remove('loading');
-      successEl.hidden = false;
-      setTimeout(() => { successEl.hidden = true; }, 5000);
+      showModal(successEl);
     }
   });
 </script>
@@ -331,7 +346,40 @@
     box-shadow: none;
   }
 
-  /* ---- Success / Error ---- */
+  /* ---- Modal ---- */
+  .wl-modal[hidden] {
+    display: none;
+  }
+
+  .wl-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .wl-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .wl-modal-content {
+    position: relative;
+    background: #1c1c1e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 40px 32px;
+    max-width: 360px;
+    width: calc(100% - 48px);
+    text-align: center;
+  }
+
   .wl-message[hidden] {
     display: none;
   }
@@ -341,8 +389,6 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    margin-top: 20px;
-    animation: fadeIn 0.4s ease;
   }
 
   @keyframes fadeIn {

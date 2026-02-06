@@ -2,33 +2,50 @@
 interface Props {
   title?: string;
   description?: string;
+  jsonLd?: Record<string, unknown>;
 }
 
 const {
   title = 'Hanyu — Learn Chinese, naturally.',
   description = 'Hanyu is a modern Chinese language learning app with smart flashcards, character writing practice, and pronunciation tools.',
+  jsonLd,
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL.href} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hanyu.app" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Hanyu" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Font: NBI International Pro CG -->
     <link rel="preload" href="/fonts/nbi-international-pro-cg-regular.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Structured Data -->
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <title>{title}</title>
   </head>

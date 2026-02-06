@@ -1,4 +1,6 @@
 ---
+import Analytics from '@vercel/analytics/astro';
+
 interface Props {
   title?: string;
   description?: string;
@@ -48,6 +50,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <title>{title}</title>
+
+    <Analytics />
   </head>
   <body>
     <slot />

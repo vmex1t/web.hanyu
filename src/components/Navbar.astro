@@ -14,17 +14,96 @@
       <a href="/#how-it-works">How it works</a>
     </div>
 
-    <a href="/#cta" class="btn btn-primary nav-cta">Join Waitlist</a>
+    <div class="nav-right">
+      <a href="/#cta" class="btn btn-primary nav-cta">Join Waitlist</a>
+      <button class="hamburger" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </nav>
 
+<!-- Mobile menu overlay -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu-header container">
+    <a href="/" class="logo mobile-menu-logo">
+      <img src="/favicon.svg" alt="Hanyu" class="logo-icon" width="32" height="32" />
+      Hanyu
+    </a>
+    <button class="menu-close" id="menu-close" type="button" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-menu-body container">
+    <div class="mobile-menu-nav">
+      <a href="/#features" class="mobile-nav-link">Features</a>
+      <a href="/#screenshots" class="mobile-nav-link">Screenshots</a>
+      <a href="/#how-it-works" class="mobile-nav-link">How it works</a>
+    </div>
+
+    <div class="mobile-menu-footer">
+      <div class="mobile-social">
+        <span class="mobile-social-label">Social</span>
+        <div class="mobile-social-links">
+          <a href="https://www.linkedin.com/company/hanyu.app" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://www.instagram.com/hanyu.app" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.facebook.com/hanyu.app" target="_blank" rel="noopener noreferrer">Facebook</a>
+        </div>
+      </div>
+
+      <a href="/#cta" class="btn mobile-menu-cta">Join Waitlist</a>
+
+      <div class="mobile-menu-legal">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <span>&copy; 2026 Hanyu.app</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   const navbar = document.getElementById('navbar');
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileNavLinks = mobileMenu?.querySelectorAll('.mobile-nav-link, .mobile-menu-cta');
+
+  // Scroll shadow
   if (navbar) {
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 10);
     });
   }
+
+  function openMenu() {
+    mobileMenu?.classList.add('menu-open');
+    mobileMenu?.setAttribute('aria-hidden', 'false');
+    menuToggle?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    mobileMenu?.classList.remove('menu-open');
+    mobileMenu?.setAttribute('aria-hidden', 'true');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  menuToggle?.addEventListener('click', openMenu);
+  menuClose?.addEventListener('click', closeMenu);
+
+  mobileNavLinks?.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
 </script>
 
 <style>
@@ -85,14 +164,189 @@
     color: var(--color-text);
   }
 
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
   .nav-cta {
     padding: 10px 20px;
     font-size: 0.875rem;
   }
 
+  .hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    color: var(--color-text);
+    border-radius: 8px;
+    transition: background-color 0.15s ease;
+  }
+
+  .hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  /* ---- Mobile Menu Overlay ---- */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background-color: #0050D4;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .mobile-menu.menu-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--nav-height);
+    flex-shrink: 0;
+  }
+
+  .mobile-menu-logo {
+    color: #fff;
+  }
+
+  .menu-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    color: #fff;
+    border-radius: 8px;
+    transition: background-color 0.15s ease;
+  }
+
+  .menu-close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-menu-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 32px;
+    overflow-y: auto;
+  }
+
+  .mobile-menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 24px;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 12px 0;
+    letter-spacing: -0.01em;
+    transition: opacity 0.15s ease;
+  }
+
+  .mobile-nav-link:hover {
+    opacity: 0.8;
+  }
+
+  .mobile-menu-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .mobile-social {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobile-social-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .mobile-social-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .mobile-social-links a {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.15s ease;
+  }
+
+  .mobile-social-links a:hover {
+    opacity: 0.8;
+  }
+
+  .mobile-menu-cta {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    text-align: center;
+    background-color: #fff;
+    color: #0050D4;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: opacity 0.15s ease;
+  }
+
+  .mobile-menu-cta:hover {
+    opacity: 0.9;
+  }
+
+  .mobile-menu-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .mobile-menu-legal a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+  }
+
+  .mobile-menu-legal a:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* ---- Responsive ---- */
   @media (max-width: 768px) {
     .nav-links {
       display: none;
+    }
+
+    .hamburger {
+      display: flex;
     }
   }
 </style>

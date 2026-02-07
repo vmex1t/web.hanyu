@@ -2,7 +2,6 @@
 ---
 
 <section class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
   <div class="container hero-inner">
     <div class="hero-text">
       <h1>Learn Chinese,<br/>naturally.</h1>
@@ -22,13 +21,13 @@
 
     <div class="hero-phones">
       <div class="phone-mockup hero-phone-main">
-        <img src="/screenshots/home-screen.webp" srcset="/screenshots/small/home-screen.webp 280w, /screenshots/home-screen.webp 560w" sizes="(max-width: 768px) 200px, 240px" alt="Hanyu app home screen" width="280" height="606" loading="eager" fetchpriority="high" />
+        <img src="/screenshots/home-screen.webp" srcset="/screenshots/small/home-screen.webp 280w, /screenshots/home-screen.webp 560w" sizes="(max-width: 768px) 200px, 220px" alt="Hanyu app home screen" width="280" height="606" loading="eager" fetchpriority="high" />
       </div>
       <div class="phone-mockup hero-phone-side hero-phone-left">
-        <img src="/screenshots/write-tab-animation.webp" srcset="/screenshots/small/write-tab-animation.webp 280w, /screenshots/write-tab-animation.webp 560w" sizes="(max-width: 768px) 160px, 200px" alt="Character writing practice" width="280" height="606" loading="eager" />
+        <img src="/screenshots/write-tab-animation.webp" srcset="/screenshots/small/write-tab-animation.webp 280w, /screenshots/write-tab-animation.webp 560w" sizes="(max-width: 768px) 160px, 180px" alt="Character writing practice" width="280" height="606" loading="eager" />
       </div>
       <div class="phone-mockup hero-phone-side hero-phone-right">
-        <img src="/screenshots/dict-tab-definitions.webp" srcset="/screenshots/small/dict-tab-definitions.webp 280w, /screenshots/dict-tab-definitions.webp 560w" sizes="(max-width: 768px) 160px, 200px" alt="Dictionary definitions" width="280" height="606" loading="eager" />
+        <img src="/screenshots/dict-tab-definitions.webp" srcset="/screenshots/small/dict-tab-definitions.webp 280w, /screenshots/dict-tab-definitions.webp 560w" sizes="(max-width: 768px) 160px, 180px" alt="Dictionary definitions" width="280" height="606" loading="eager" />
       </div>
     </div>
   </div>
@@ -42,24 +41,16 @@
     overflow: hidden;
   }
 
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0, 97, 255, 0.06) 0%, transparent 100%);
-    pointer-events: none;
-  }
-
   .hero-inner {
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
+    gap: 48px;
   }
 
   .hero-text {
-    max-width: 640px;
-    margin-bottom: 64px;
+    flex: 0 0 45%;
+    max-width: 45%;
   }
 
   .hero h1 {
@@ -70,14 +61,12 @@
     font-size: var(--size-body-lg);
     color: var(--color-text-secondary);
     max-width: 460px;
-    margin-inline: auto;
     margin-bottom: 36px;
   }
 
   .hero-actions {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 24px;
     flex-wrap: wrap;
   }
@@ -103,42 +92,62 @@
 
   /* Phone cluster */
   .hero-phones {
+    flex: 1;
     position: relative;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    width: 100%;
-    max-width: 700px;
+    min-height: 460px;
   }
 
   .hero-phone-main {
     position: relative;
     z-index: 2;
-    width: 240px;
+    width: 220px;
     flex-shrink: 0;
   }
 
   .hero-phone-side {
     position: absolute;
-    width: 200px;
+    width: 180px;
     top: 40px;
     opacity: 0.85;
     z-index: 1;
   }
 
   .hero-phone-left {
-    right: calc(50% + 100px);
+    right: calc(50% + 90px);
     transform: rotate(-6deg);
   }
 
   .hero-phone-right {
-    left: calc(50% + 100px);
+    left: calc(50% + 90px);
     transform: rotate(6deg);
   }
 
+  /* ---- Tablet ---- */
   @media (max-width: 768px) {
+    .hero-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
     .hero-text {
-      margin-bottom: 48px;
+      flex: none;
+      max-width: 640px;
+      margin-bottom: 16px;
+    }
+
+    .hero-sub {
+      margin-inline: auto;
+    }
+
+    .hero-actions {
+      justify-content: center;
+    }
+
+    .hero-phones {
+      min-height: auto;
     }
 
     .hero-phone-main {
@@ -159,6 +168,7 @@
     }
   }
 
+  /* ---- Mobile ---- */
   @media (max-width: 480px) {
     .hero-phone-side {
       display: none;

@@ -7,4 +7,7 @@ export default defineConfig({
   site: 'https://hanyu.app',
   output: 'static',
   integrations: [sitemap()],
+  build: {
+    inlineStylesheets: 'always',
+  },
 });

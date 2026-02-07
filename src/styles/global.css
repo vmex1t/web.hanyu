@@ -1,8 +1,24 @@
 /* ===== Font ===== */
 @font-face {
-  font-family: 'NBI International Pro CG';
-  src: url('/fonts/nbi-international-pro-cg-regular.woff2') format('woff2');
+  font-family: 'Intercom Text';
+  src: url('/fonts/intercom-text-book.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Intercom Text';
+  src: url('/fonts/intercom-text-regular.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Intercom Text';
+  src: url('/fonts/intercom-text-semibold.woff2') format('woff2');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
@@ -23,7 +39,7 @@ html {
 }
 
 body {
-  font-family: 'NBI International Pro CG', system-ui, -apple-system, sans-serif;
+  font-family: 'Intercom Text', system-ui, -apple-system, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: var(--color-text);
@@ -64,8 +80,8 @@ ol {
   --color-text: #1E1919;
   --color-text-secondary: #637381;
 
-  --font-heading: 'NBI International Pro CG', system-ui, -apple-system, sans-serif;
-  --font-body: 'NBI International Pro CG', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Intercom Text', system-ui, -apple-system, sans-serif;
+  --font-body: 'Intercom Text', system-ui, -apple-system, sans-serif;
 
   --size-h1: clamp(2.5rem, 5.5vw, 3.75rem);
   --size-h2: clamp(1.75rem, 3.5vw, 2.5rem);

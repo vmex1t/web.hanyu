@@ -1,11 +1,11 @@
 ---
 const screenshots = [
-  { src: '/screenshots/home-screen.png', alt: 'Home screen with daily progress' },
-  { src: '/screenshots/dict-tab-definitions.png', alt: 'Dictionary definitions view' },
-  { src: '/screenshots/write-tab-animation.png', alt: 'Stroke order animation' },
-  { src: '/screenshots/dict-tab-tooltip.png', alt: 'Interactive word tooltips' },
-  { src: '/screenshots/practice-complete.png', alt: 'Practice results' },
-  { src: '/screenshots/dict-tab-examples.png', alt: 'Example sentences and words' },
+  { src: '/screenshots/home-screen.webp', alt: 'Home screen with daily progress' },
+  { src: '/screenshots/dict-tab-definitions.webp', alt: 'Dictionary definitions view' },
+  { src: '/screenshots/write-tab-animation.webp', alt: 'Stroke order animation' },
+  { src: '/screenshots/dict-tab-tooltip.webp', alt: 'Interactive word tooltips' },
+  { src: '/screenshots/practice-complete.webp', alt: 'Practice results' },
+  { src: '/screenshots/dict-tab-examples.webp', alt: 'Example sentences and words' },
 ];
 ---
 
@@ -21,7 +21,7 @@ const screenshots = [
     <div class="scroll-inner">
       {screenshots.map((s) => (
         <div class="phone-mockup scroll-phone">
-          <img src={s.src} alt={s.alt} width="280" height="606" loading="lazy" />
+          <img src={s.src} srcset={`/screenshots/small/${s.src.split('/').pop()} 280w, ${s.src} 560w`} sizes="(max-width: 768px) 180px, 220px" alt={s.alt} width="280" height="606" loading="lazy" />
         </div>
       ))}
     </div>

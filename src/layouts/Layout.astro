@@ -2,6 +2,8 @@
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
 
+const isVercel = !!process.env.VERCEL;
+
 interface Props {
   title?: string;
   description?: string;
@@ -35,19 +37,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Hanyu" />
+    <meta property="og:image" content="https://hanyu.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hanyu — Learn Chinese, naturally." />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://hanyu.app/og-image.png" />
+    <meta name="twitter:image:alt" content="Hanyu — Learn Chinese, naturally." />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0061FF" />
 
-    <!-- Font: Origin -->
+    <!-- Font: Origin (only preload the primary body weight to reduce LCP render delay) -->
     <link rel="preload" href="/fonts/origin-book.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/origin-regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/origin-semibold.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Structured Data -->
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
@@ -55,11 +63,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
 
     <!-- Vercel Analytics -->
-    <Analytics />
+    {isVercel && <Analytics />}
   </head>
   <body>
     <slot />
-    <SpeedInsights />
+    {isVercel && <SpeedInsights />}
   </body>
 </html>
 

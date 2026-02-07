@@ -5,7 +5,7 @@ const features = [
     title: 'Deep character insights',
     description:
       'Look up any word or character and get definitions, decompositions, character forms, and example words — all in one view.',
-    screenshot: '/screenshots/dict-tab-definitions.png',
+    screenshot: '/screenshots/dict-tab-definitions.webp',
     alt: 'Dictionary tab showing definitions and decomposition',
   },
   {
@@ -13,7 +13,7 @@ const features = [
     title: 'Master stroke order',
     description:
       'Practice writing characters stroke by stroke with animated guides and instant feedback. Build muscle memory the right way.',
-    screenshot: '/screenshots/write-tab-animation.png',
+    screenshot: '/screenshots/write-tab-animation.webp',
     alt: 'Write tab showing stroke order animation',
   },
   {
@@ -21,7 +21,7 @@ const features = [
     title: 'Track your progress',
     description:
       'Test yourself with interactive practice sessions. See your accuracy and stroke order scores after every character.',
-    screenshot: '/screenshots/practice-complete.png',
+    screenshot: '/screenshots/practice-complete.webp',
     alt: 'Practice complete screen with score',
   },
 ];
@@ -44,7 +44,7 @@ const features = [
         </div>
         <div class="feature-phone">
           <div class="phone-mockup">
-            <img src={f.screenshot} alt={f.alt} width="280" height="606" loading="lazy" />
+            <img src={f.screenshot} srcset={`/screenshots/small/${f.screenshot.split('/').pop()} 280w, ${f.screenshot} 560w`} sizes="(max-width: 768px) 200px, 240px" alt={f.alt} width="280" height="606" loading="lazy" />
           </div>
         </div>
       </div>
